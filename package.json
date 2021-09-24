@@ -27,6 +27,7 @@
     "babel-jest": "^27.1.1",
     "jest": "^27.1.1",
     "nodemon": "^2.0.12",
+    "tulleries": "https://github.com/concentric-dev-git/tulleries",
     "typescript": "^4.4.2"
   },
   "dependencies": {

@@ -1,5 +1,6 @@
 import { isLikelyDeterministic } from "./isLikelyDeterministic";
 import { performance } from "perf_hooks";
+import {withPrecision} from "tulleries";
 
 export const CheckOrderTestSuiteA = ()=>{
 
@@ -8,9 +9,6 @@ export const CheckOrderTestSuiteA = ()=>{
         test("Detects probable determinism", ()=>{
 
             const func = (a : number, b : number)=>a+b;
-            const toleranceFunc = (a : number, b : number)=>{
-                return Math.abs(a - b) < 0.0001
-            }
 
             const generator = () : [number, number]=>[
                 Math.random() * Number.MAX_SAFE_INTEGER,
@@ -26,7 +24,7 @@ export const CheckOrderTestSuiteA = ()=>{
                     argGenerator : generator,
                     width : Math.floor(Math.random() * 100),
                     depth : Math.floor(Math.random() * 100),
-                    toleranceFunc: toleranceFunc
+                    toleranceFunc: withPrecision()
                 })
 
             }, true)

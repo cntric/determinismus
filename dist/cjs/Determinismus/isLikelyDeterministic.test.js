@@ -3,13 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CheckOrderTestSuiteA = void 0;
 const isLikelyDeterministic_1 = require("./isLikelyDeterministic");
 const perf_hooks_1 = require("perf_hooks");
+const tulleries_1 = require("tulleries");
 const CheckOrderTestSuiteA = () => {
     describe("Basic functionality", () => {
         test("Detects probable determinism", () => {
             const func = (a, b) => a + b;
-            const toleranceFunc = (a, b) => {
-                return Math.abs(a - b) < 0.0001;
-            };
             const generator = () => [
                 Math.random() * Number.MAX_SAFE_INTEGER,
                 Math.random() * Number.MAX_SAFE_INTEGER
@@ -21,7 +19,7 @@ const CheckOrderTestSuiteA = () => {
                     argGenerator: generator,
                     width: Math.floor(Math.random() * 100),
                     depth: Math.floor(Math.random() * 100),
-                    toleranceFunc: toleranceFunc
+                    toleranceFunc: (0, tulleries_1.withPrecision)()
                 });
             }, true);
             expect(isDeterministic).toBe(true);

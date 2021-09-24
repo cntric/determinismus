@@ -1,12 +1,10 @@
 import { isLikelyDeterministic } from "./isLikelyDeterministic";
 import { performance } from "perf_hooks";
+import { withPrecision } from "tulleries";
 export const CheckOrderTestSuiteA = () => {
     describe("Basic functionality", () => {
         test("Detects probable determinism", () => {
             const func = (a, b) => a + b;
-            const toleranceFunc = (a, b) => {
-                return Math.abs(a - b) < 0.0001;
-            };
             const generator = () => [
                 Math.random() * Number.MAX_SAFE_INTEGER,
                 Math.random() * Number.MAX_SAFE_INTEGER
@@ -18,7 +16,7 @@ export const CheckOrderTestSuiteA = () => {
                     argGenerator: generator,
                     width: Math.floor(Math.random() * 100),
                     depth: Math.floor(Math.random() * 100),
-                    toleranceFunc: toleranceFunc
+                    toleranceFunc: withPrecision()
                 });
             }, true);
             expect(isDeterministic).toBe(true);

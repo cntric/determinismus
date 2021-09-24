@@ -3831,6 +3831,16 @@ tr46@^2.1.0:
   dependencies:
     punycode "^2.1.1"
 
+"tulleries@https://github.com/concentric-dev-git/tulleries":
+  version "0.1.0"
+  resolved "https://github.com/concentric-dev-git/tulleries#397496154c306c922e4498191389533fadfccc3e"
+  dependencies:
+    "@types/node" "^16.9.1"
+    "@types/shortid" "^0.0.29"
+    http-server "^13.0.2"
+    shortid "^2.2.16"
+    typedoc "^0.22.4"
+
 type-check@~0.3.2:
   version "0.3.2"
   resolved "https://registry.npmjs.org/type-check/-/type-check-0.3.2.tgz"
