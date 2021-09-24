@@ -31,4 +31,4 @@ export interface isLikelyDeterministicKwargsI<F extends (...args: any[]) => any>
  * @param kwargs Keyword arguments containing the
  * @returns
  */
-export declare const isLikelyDeterministic: <F extends (...args: any[]) => any>(kwargs: isLikelyDeterministicKwargsI<F>) => boolean;
+export declare const seemsDeterministic: <F extends (...args: any[]) => any>(kwargs: isLikelyDeterministicKwargsI<F>) => boolean;

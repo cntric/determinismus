@@ -11,7 +11,7 @@ const _isLikelyDeterministic = (kwargs) => {
  * @param kwargs Keyword arguments containing the
  * @returns
  */
-export const isLikelyDeterministic = (kwargs) => {
+export const seemsDeterministic = (kwargs) => {
     return _isLikelyDeterministic({
         ...kwargs,
         width: kwargs.width ? kwargs.width : 100,

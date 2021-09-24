@@ -1,10 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckOrderTestSuiteA = void 0;
-const isLikelyDeterministic_1 = require("./isLikelyDeterministic");
-const perf_hooks_1 = require("perf_hooks");
-const tulleries_1 = require("tulleries");
-const CheckOrderTestSuiteA = () => {
+import { seemsDeterministic } from "./seemsDeterministic";
+import { performance } from "perf_hooks";
+import { withPrecision } from "tulleries";
+export const CheckOrderTestSuiteA = () => {
     describe("Basic functionality", () => {
         test("Detects probable determinism", () => {
             const func = (a, b) => a + b;
@@ -14,25 +11,25 @@ const CheckOrderTestSuiteA = () => {
             ];
             const i = Math.floor(Math.random() * 900) + 100;
             const isDeterministic = Array(i).fill(null).reduce((last) => {
-                return last && (0, isLikelyDeterministic_1.isLikelyDeterministic)({
+                return last && seemsDeterministic({
                     func: func,
                     argGenerator: generator,
                     width: Math.floor(Math.random() * 100),
                     depth: Math.floor(Math.random() * 100),
-                    toleranceFunc: (0, tulleries_1.withPrecision)()
+                    toleranceFunc: withPrecision()
                 });
             }, true);
             expect(isDeterministic).toBe(true);
         });
         test("Detects indeterminism", () => {
-            const func = (a, b) => perf_hooks_1.performance.now();
+            const func = (a, b) => performance.now();
             const generator = () => [
                 Math.random() * Number.MAX_SAFE_INTEGER,
                 Math.random() * Number.MAX_SAFE_INTEGER
             ];
             const i = Math.floor(Math.random() * 900) + 100;
             const isDeterministic = Array(i).fill(null).reduce((last) => {
-                return last && (0, isLikelyDeterministic_1.isLikelyDeterministic)({
+                return last && seemsDeterministic({
                     func: func,
                     argGenerator: generator,
                     width: Math.floor(Math.random() * 100),
@@ -42,14 +39,14 @@ const CheckOrderTestSuiteA = () => {
             expect(isDeterministic).toBe(false);
         });
         test("Autogenerates width, depth, and tolerance", () => {
-            const func = (a, b) => perf_hooks_1.performance.now();
+            const func = (a, b) => performance.now();
             const generator = () => [
                 Math.random() * Number.MAX_SAFE_INTEGER,
                 Math.random() * Number.MAX_SAFE_INTEGER
             ];
             const i = Math.floor(Math.random() * 900) + 100;
             const isDeterministic = Array(i).fill(null).reduce((last) => {
-                return last && (0, isLikelyDeterministic_1.isLikelyDeterministic)({
+                return last && seemsDeterministic({
                     func: func,
                     argGenerator: generator,
                 });
@@ -58,5 +55,4 @@ const CheckOrderTestSuiteA = () => {
         });
     });
 };
-exports.CheckOrderTestSuiteA = CheckOrderTestSuiteA;
-(0, exports.CheckOrderTestSuiteA)();
+CheckOrderTestSuiteA();

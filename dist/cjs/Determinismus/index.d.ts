@@ -1,1 +1,1 @@
-export * from "./isLikelyDeterministic";
+export * from "./seemsDeterministic";

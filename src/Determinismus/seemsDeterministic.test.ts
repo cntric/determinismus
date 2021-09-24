@@ -1,4 +1,4 @@
-import { isLikelyDeterministic } from "./isLikelyDeterministic";
+import { seemsDeterministic } from "./seemsDeterministic";
 import { performance } from "perf_hooks";
 import {withPrecision} from "tulleries";
 
@@ -19,7 +19,7 @@ export const CheckOrderTestSuiteA = ()=>{
             
             const isDeterministic = Array(i).fill(null).reduce((last)=>{
 
-                return last && isLikelyDeterministic({
+                return last && seemsDeterministic({
                     func : func, 
                     argGenerator : generator,
                     width : Math.floor(Math.random() * 100),
@@ -46,7 +46,7 @@ export const CheckOrderTestSuiteA = ()=>{
             
             const isDeterministic = Array(i).fill(null).reduce((last)=>{
 
-                return last && isLikelyDeterministic({
+                return last && seemsDeterministic({
                     func : func, 
                     argGenerator : generator,
                     width : Math.floor(Math.random() * 100),
@@ -72,7 +72,7 @@ export const CheckOrderTestSuiteA = ()=>{
             
             const isDeterministic = Array(i).fill(null).reduce((last)=>{
 
-                return last && isLikelyDeterministic({
+                return last && seemsDeterministic({
                     func : func, 
                     argGenerator : generator,
                 })
